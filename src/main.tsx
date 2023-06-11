@@ -61,7 +61,7 @@ body {
   font-weight: 300;
   font-family: 'Source Sans Pro', sans-serif;
   color: ${(props) => props.theme.white.darker};
-  background-color: black;
+  background-color: #1b1b1b;
 }
 a {
   text-decoration: none;
