@@ -1,5 +1,12 @@
+import Carousel from "../Components/Carousel";
+
 const Tv = () => {
-  return <div>Tv</div>;
+  return (
+    <div>
+      <Carousel />
+      Tv
+    </div>
+  );
 };
 
 export default Tv;

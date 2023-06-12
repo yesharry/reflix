@@ -5,7 +5,7 @@ const HItems = () => {
   return (
     <Items>
       {ITEMS.map((items) => (
-        <Item>
+        <Item key={items.id}>
           <Link to={items.link}>{items.name}</Link>
         </Item>
       ))}
