@@ -3,7 +3,7 @@ const BASE_PATH = "https://api.themoviedb.org/3/";
 const REGION = "KR";
 const LANGUAGE = "ko-KO";
 
-interface IMovie {
+export interface IMovie {
   id: number;
   backdrop_path: string;
   poster_path: string;
@@ -13,7 +13,7 @@ interface IMovie {
   vote_average: string;
 }
 
-export interface IGetMoviesResult {
+export interface IGetDataResult {
   dates: {
     maximum: string;
     minimum: string;
