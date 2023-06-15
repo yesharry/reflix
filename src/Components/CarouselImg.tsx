@@ -1,12 +1,25 @@
 import { styled } from "styled-components";
 import { IGetDataResult } from "../api";
 import { makeImagePath } from "../utils";
+import { useEffect, useRef, useState } from "react";
 
 interface IMovieData {
   data: IGetDataResult;
 }
 
 const CarouselImg = ({ data }: IMovieData) => {
+  const [count, setCount] = useState<number>(0);
+  // const slideRef = useRef("");
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount((count) =>
+        count < data.results.slice(0, 5).length - 1 ? count + 1 : 0
+      );
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [count, data?.results.slice(0, 5)]);
+
   return (
     <Container>
       {data?.results.slice(0, 5).map((data) => (
