@@ -1,4 +1,4 @@
-import Carousel from "../Components/Carousel";
+import Carousel from "../Components/Carousel/Carousel";
 import { styled } from "styled-components";
 
 const Home = () => {

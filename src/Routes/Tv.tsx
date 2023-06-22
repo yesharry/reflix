@@ -1,4 +1,4 @@
-import Carousel from "../Components/Carousel";
+import Carousel from "../Components/Carousel/Carousel";
 
 const Tv = () => {
   return (

@@ -1,16 +1,21 @@
 import { styled } from "styled-components";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { IGetDataResult } from "../../api";
 
-const CarouselBtn = () => {
+interface IMovieData {
+  data: IGetDataResult;
+}
+
+const CarouselBtn = ({ data }: IMovieData) => {
   return (
-    <BtnWrapper>
+    <BtnContainer>
       <IoIosArrowBack className="back" />
       <IoIosArrowForward className="forward" />
-    </BtnWrapper>
+    </BtnContainer>
   );
 };
 
-const BtnWrapper = styled.div`
+const BtnContainer = styled.div`
   width: 100%;
   height: 100%;
   color: #a5a5a5;
@@ -19,14 +24,15 @@ const BtnWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  cursor: pointer;
 
   .back {
+    cursor: pointer;
     &:hover {
       color: white;
     }
   }
   .forward {
+    cursor: pointer;
     &:hover {
       color: white;
     }

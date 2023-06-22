@@ -1,27 +1,27 @@
 import { styled } from "styled-components";
-import { IGetDataResult } from "../api";
-import { makeImagePath } from "../utils";
+import { IGetDataResult } from "../../api";
+import { makeImagePath } from "../../utils";
 import { useEffect, useRef, useState } from "react";
 
 interface IMovieData {
   data: IGetDataResult;
 }
 
-const CarouselImg = ({ data }: IMovieData) => {
-  const [count, setCount] = useState<number>(0);
-  // const slideRef = useRef("");
+const Carousel3 = ({ data }: IMovieData) => {
+  const [current, setCurrent] = useState<number>(0);
+  const slideRef = useRef("");
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCount((count) =>
-        count < data.results.slice(0, 5).length - 1 ? count + 1 : 0
+      setCurrent((current) =>
+        current < data.results.slice(0, 5).length - 1 ? current + 1 : 0
       );
     }, 1000);
     return () => clearInterval(timer);
-  }, [count, data?.results.slice(0, 5)]);
+  }, [current, data?.results.slice(0, 5)]);
 
   return (
-    <Container>
+    <Container ref={slideRef}>
       {data?.results.slice(0, 5).map((data) => (
         <Banner key={data.id} bgPhoto={makeImagePath(data.backdrop_path)}>
           <Title>{data.title}</Title>
@@ -49,7 +49,7 @@ const Banner = styled.div<{ bgPhoto: string }>`
   display: flex;
   flex-direction: column;
   justify-content: end;
-  padding: 50px 25px;
+  padding: 40px;
 `;
 
 const Title = styled.h2`
@@ -64,4 +64,4 @@ const Overview = styled.p`
   line-height: 30px;
 `;
 
-export default CarouselImg;
+export default Carousel3;
