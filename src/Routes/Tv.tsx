@@ -1,9 +1,9 @@
-import Carousel from "../Components/Carousel/Carousel";
+// import Carousel from "../Components/Carousel/Carousel";
 
 const Tv = () => {
   return (
     <div>
-      <Carousel />
+      {/* <Carousel /> */}
       Tv
     </div>
   );

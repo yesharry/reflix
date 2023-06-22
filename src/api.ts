@@ -29,3 +29,9 @@ export function getPopularMovies() {
     `${BASE_PATH}/movie/popular?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}`
   ).then((response) => response.json());
 }
+
+export function getNowPlayingMovies() {
+  return fetch(
+    `${BASE_PATH}/movie/now_playing?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}`
+  ).then((response) => response.json());
+}
