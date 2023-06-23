@@ -1,14 +1,11 @@
 // import Carousel from "../Components/Carousel/Carousel";
-import { AnimatePresence, motion } from "framer-motion";
 import { useQuery } from "react-query";
 import { styled } from "styled-components";
 import { IGetDataResult, getNowPlayingMovies, getPopularMovies } from "../api";
-import { makeImagePath } from "../utils";
+
 import Slider from "../Components/Slider/Slider";
 
 const Home = () => {
-  // console.log(data);
-
   // const { data: popularMovies } = useQuery<IGetDataResult>(
   //   ["popular"],
   //   getPopularMovies

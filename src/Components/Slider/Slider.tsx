@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import { IGetDataResult } from "../../api";
 import { makeImagePath } from "../../utils";
 import { useState } from "react";
+import SlideBtn from "./SlideBtn";
 
 interface ISlideData {
   data: IGetDataResult;
@@ -13,31 +14,55 @@ const offset = 5;
 const Slider = ({ data }: ISlideData) => {
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
+  const [back, setBack] = useState(false);
+
+  // const onClickToArrowBtn = (right: number) => {
+  //   return 0;
+  // };
 
   const toggleLeaving = () => setLeaving((prev) => !prev);
 
   const increaseIndex = () => {
     if (data) {
       if (leaving) return;
+      setBack(true);
       toggleLeaving();
-      const totalMovie = data.results.length;
+      const totalMovie = data.results.length - 1;
       const maxIndex = Math.floor(totalMovie / offset) - 1;
-      setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+      setIndex((prev) =>
+        prev === maxIndex ? 0 : back === false ? prev + 1 : prev - 1
+      );
+    }
+  };
+
+  const decreaseIndex = () => {
+    if (data) {
+      if (leaving) return;
+      setBack(false);
+      toggleLeaving();
+      const totalMovie = data.results.length - 1;
+      const maxIndex = Math.floor(totalMovie / offset) - 1;
+      setIndex((prev) => (prev === maxIndex ? 0 : prev - 1));
+    }
+  };
+
+  const changeIndex = () => {
+    if (data) {
+      if (leaving) return;
+      toggleLeaving();
+      const totalMovie = data.results.length - 1;
+      const maxIndex = Math.floor(totalMovie / offset) - 1;
+      back === false
+        ? setIndex((prev) => (prev === maxIndex ? 0 : prev - 1))
+        : setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
     }
   };
 
   return (
     <SliderContainer>
-      <Btn>prev</Btn>
-      <AnimatePresence onExitComplete={toggleLeaving}>
-        <Row
-          key={index}
-          variants={rowVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          transition={{ type: "tween", duration: 0.5 }}
-        >
+      {/* <SlideBtn onClickToArrowBtn={onClickToArrowBtn} /> */}
+      <AnimatePresence initial={false}>
+        <Row key={index}>
           {data?.results
             .slice(offset * index, offset * index + offset)
             .map((data) => (
@@ -48,7 +73,6 @@ const Slider = ({ data }: ISlideData) => {
             ))}
         </Row>
       </AnimatePresence>
-      <Btn onClick={increaseIndex}>next</Btn>
     </SliderContainer>
   );
 };
@@ -67,16 +91,53 @@ const Row = styled(motion.div)`
   position: absolute;
 `;
 
+// const rowVariants = {
+//   hidden: {
+//     x: window.outerWidth + 5,
+//   },
+//   visible: {
+//     x: 0,
+//   },
+//   exit: {
+//     x: -window.outerWidth - 5,
+//   },
+// };
+
+// const rowVariants = {
+//   hidden: (right: number) => {
+//     return {
+//       x: right === 1 ? window.innerWidth + 5 : -window.innerWidth - 5,
+//     };
+//   },
+//   visible: {
+//     x: 0,
+//     y: 0,
+//   },
+//   exit: (right: number) => {
+//     return {
+//       x: right === -1 ? window.innerWidth - 5 : -window.innerWidth + 5,
+//     };
+//   },
+// };
+
 const rowVariants = {
-  hidden: {
-    x: window.outerWidth + 5,
+  hidden: (right: number) => {
+    if (right === 1) {
+      return { x: window.outerWidth + 5 };
+    } else {
+      return { x: -window.outerWidth - 5 };
+    }
   },
   visible: {
     x: 0,
   },
-  exit: {
-    x: -window.outerWidth - 5,
-  },
+  // exit: (right: number) => {
+  //   if (right === 1) {
+  //     return { x: -window.outerWidth - 5 };
+  //   } else {
+  //     return { x: window.outerWidth + 5 };
+  //   }
+  // },
 };
 
 const Box = styled(motion.div)<{ bgPhoto: string }>`
