@@ -20,49 +20,62 @@ const Slider = ({ data }: ISlideData) => {
   //   return 0;
   // };
 
-  const toggleLeaving = () => setLeaving((prev) => !prev);
+  console.log(data);
 
   const increaseIndex = () => {
-    if (data) {
-      if (leaving) return;
-      setBack(true);
-      toggleLeaving();
-      const totalMovie = data.results.length - 1;
-      const maxIndex = Math.floor(totalMovie / offset) - 1;
-      setIndex((prev) =>
-        prev === maxIndex ? 0 : back === false ? prev + 1 : prev - 1
-      );
-    }
-  };
-
-  const decreaseIndex = () => {
     if (data) {
       if (leaving) return;
       setBack(false);
       toggleLeaving();
       const totalMovie = data.results.length - 1;
       const maxIndex = Math.floor(totalMovie / offset) - 1;
-      setIndex((prev) => (prev === maxIndex ? 0 : prev - 1));
+      setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
     }
   };
 
-  const changeIndex = () => {
+  const decreaseIndex = () => {
     if (data) {
       if (leaving) return;
+      setBack(true);
       toggleLeaving();
       const totalMovie = data.results.length - 1;
       const maxIndex = Math.floor(totalMovie / offset) - 1;
-      back === false
-        ? setIndex((prev) => (prev === maxIndex ? 0 : prev - 1))
-        : setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+      setIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
     }
   };
+
+  const toggleLeaving = () => setLeaving((prev) => !prev);
+
+  // const changeIndex = () => {
+  //   if (data) {
+  //     if (leaving) return;
+  //     toggleLeaving();
+  //     const totalMovie = data.results.length - 1;
+  //     const maxIndex = Math.floor(totalMovie / offset) - 1;
+  //     back === false
+  //       ? setIndex((prev) => (prev === maxIndex ? 0 : prev - 1))
+  //       : setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+  //   }
+  // };
 
   return (
     <SliderContainer>
       {/* <SlideBtn onClickToArrowBtn={onClickToArrowBtn} /> */}
-      <AnimatePresence initial={false}>
-        <Row key={index}>
+      <SlideBtn increaseIndex={increaseIndex} decreaseIndex={decreaseIndex} />
+      <AnimatePresence
+        initial={false}
+        onExitComplete={toggleLeaving}
+        custom={{ back }}
+      >
+        <Row
+          key={index}
+          variants={rowVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={back}
+          transition={{ type: "tween", duration: 0.5 }}
+        >
           {data?.results
             .slice(offset * index, offset * index + offset)
             .map((data) => (
@@ -91,17 +104,17 @@ const Row = styled(motion.div)`
   position: absolute;
 `;
 
-// const rowVariants = {
-//   hidden: {
-//     x: window.outerWidth + 5,
-//   },
-//   visible: {
-//     x: 0,
-//   },
-//   exit: {
-//     x: -window.outerWidth - 5,
-//   },
-// };
+const rowVariants = {
+  hidden: ({ back }: { back: boolean }) => ({
+    x: back ? -outerWidth - 5 : outerWidth + 5,
+  }),
+  visible: {
+    x: 0,
+  },
+  exit: ({ back }: { back: boolean }) => ({
+    x: back ? outerWidth + 5 : -outerWidth - 5,
+  }),
+};
 
 // const rowVariants = {
 //   hidden: (right: number) => {
@@ -120,25 +133,25 @@ const Row = styled(motion.div)`
 //   },
 // };
 
-const rowVariants = {
-  hidden: (right: number) => {
-    if (right === 1) {
-      return { x: window.outerWidth + 5 };
-    } else {
-      return { x: -window.outerWidth - 5 };
-    }
-  },
-  visible: {
-    x: 0,
-  },
-  // exit: (right: number) => {
-  //   if (right === 1) {
-  //     return { x: -window.outerWidth - 5 };
-  //   } else {
-  //     return { x: window.outerWidth + 5 };
-  //   }
-  // },
-};
+// const rowVariants = {
+//   hidden: (right: number) => {
+//     if (right === 1) {
+//       return { x: window.outerWidth + 5 };
+//     } else {
+//       return { x: -window.outerWidth - 5 };
+//     }
+//   },
+//   visible: {
+//     x: 0,
+//   },
+//   // exit: (right: number) => {
+//   //   if (right === 1) {
+//   //     return { x: -window.outerWidth - 5 };
+//   //   } else {
+//   //     return { x: window.outerWidth + 5 };
+//   //   }
+//   // },
+// };
 
 const Box = styled(motion.div)<{ bgPhoto: string }>`
   width: 240px;

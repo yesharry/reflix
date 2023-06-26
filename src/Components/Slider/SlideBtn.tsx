@@ -1,26 +1,30 @@
+import { motion } from "framer-motion";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { styled } from "styled-components";
 
 interface ISlideBtn {
-  onClickToArrowBtn: (right: number) => void;
+  // onClickToArrowBtn: (right: number) => void;
+  increaseIndex: () => void;
+  decreaseIndex: () => void;
 }
 
-const SlideBtn = ({ onClickToArrowBtn }: ISlideBtn) => {
+const SlideBtn = ({ increaseIndex, decreaseIndex }: ISlideBtn) => {
   return (
     <BtnContainer>
-      <IoIosArrowBack className="back" onClick={() => onClickToArrowBtn(-1)} />
-      <IoIosArrowForward
-        className="forward"
-        onClick={() => onClickToArrowBtn(1)}
-      />
+      <BtnBox onClick={decreaseIndex}>
+        <IoIosArrowBack />
+      </BtnBox>
+      <BtnBox onClick={increaseIndex}>
+        <IoIosArrowForward />
+      </BtnBox>
     </BtnContainer>
   );
 };
 
 const BtnContainer = styled.div`
-  .forward {
-    cursor: pointer;
-  }
+  display: flex;
 `;
+
+const BtnBox = styled.div``;
 
 export default SlideBtn;
