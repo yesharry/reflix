@@ -94,7 +94,7 @@ const SliderContainer = styled.div`
   position: relative;
 `;
 
-const Btn = styled.button``;
+// const Btn = styled.button``;
 
 const Row = styled(motion.div)`
   background-color: #00ffae79;
