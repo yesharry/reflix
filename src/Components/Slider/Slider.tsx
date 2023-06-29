@@ -3,7 +3,7 @@ import { IGetDataResult } from "../../api";
 import { AnimatePresence, motion } from "framer-motion";
 import { styled } from "styled-components";
 import { makeImagePath } from "../../utils";
-// import SlideBtn from "./SlideBtn";
+import SlideBtn from "./SlideBtn";
 
 interface ISlider {
   data: IGetDataResult;
@@ -42,9 +42,7 @@ const Slider = ({ data }: ISlider) => {
 
   return (
     <SliderContainer>
-      {/* <SlideBtn /> */}
-      <button onClick={decreaseIndex}>prev</button>
-      <button onClick={increaseIndex}>next</button>
+      <SlideBtn decreaseIndex={decreaseIndex} increaseIndex={increaseIndex} />
       <AnimatePresence
         initial={false}
         custom={back}
