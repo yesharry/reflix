@@ -73,7 +73,7 @@ const Slider = ({ data, title }: ISlider) => {
 };
 
 const Wrapper = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 `;
 
 const SliderContainer = styled.div`

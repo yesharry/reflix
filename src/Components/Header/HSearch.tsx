@@ -1,24 +1,83 @@
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
+interface IForm {
+  keyword: string;
+}
+
 const HSearch = () => {
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const inputAnimation = useAnimation();
+
+  const toggleSearch = () => {
+    if (searchOpen) {
+      inputAnimation.start({ scaleX: 0 });
+    } else {
+      inputAnimation.start({ scaleX: 1 });
+    }
+    setSearchOpen((prev) => !prev);
+  };
+
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm<IForm>();
+  const onValid = (data: IForm) => {
+    navigate(`/search?keyword=${data.keyword}`);
+  };
+
   return (
-    <Search>
+    <Search onSubmit={handleSubmit(onValid)}>
       <motion.svg
-        xmlns="http://www.w3.org/2000/svg"
-        height="1em"
+        onClick={toggleSearch}
+        animate={{ x: searchOpen ? -180 : 0 }}
+        transition={{ type: "linear" }}
         fill="currentColor"
-        viewBox="0 0 512 512"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+        <path
+          fillRule="evenodd"
+          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+          clipRule="evenodd"
+        ></path>
       </motion.svg>
-      <Input placeholder="검색어를 입력해주세요." />
+      <Input
+        {...register("keyword", { required: true, minLength: 2 })}
+        animate={inputAnimation}
+        initial={{ scaleX: 0 }}
+        transition={{ type: "linear" }}
+        placeholder="검색어를 입력해주세요.."
+      />
     </Search>
   );
 };
 
-const Search = styled.form``;
+const Search = styled.form`
+  color: white;
+  display: flex;
+  align-items: center;
+  position: relative;
+  svg {
+    height: 20px;
+  }
+  cursor: pointer;
+`;
 
-const Input = styled(motion.input)``;
+const Input = styled(motion.input)`
+  transform-origin: right center;
+  background-color: transparent;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #a5a5a5;
+  padding: 10px 10px;
+  padding-left: 30px;
+  position: absolute;
+  right: 0px;
+  z-index: -1;
+`;
 
 export default HSearch;

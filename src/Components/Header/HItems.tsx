@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import { styled } from "styled-components";
 
 const HItems = () => {
@@ -34,20 +34,17 @@ export default HItems;
 const ITEMS = [
   {
     id: 0,
-    name: "홈",
+    name: "HOME",
     link: "/",
-    match: "homeMatch",
   },
   {
     id: 1,
-    name: "무우비",
-    link: "movie",
-    match: "movieMatch",
+    name: "TV",
+    link: "tv",
   },
   {
     id: 2,
-    name: "테레비",
-    link: "tv",
-    match: "tvMatch",
+    name: "MY",
+    link: "my",
   },
 ];
