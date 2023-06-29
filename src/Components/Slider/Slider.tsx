@@ -41,45 +41,44 @@ const Slider = ({ data }: ISlider) => {
   const toggleLeaving = () => setLeaving((prev) => !prev);
 
   return (
-    <SliderContainer>
-      <SlideBtn decreaseIndex={decreaseIndex} increaseIndex={increaseIndex} />
-      <AnimatePresence
-        initial={false}
-        custom={back}
-        onExitComplete={toggleLeaving}
-      >
-        <Row
-          key={index}
-          variants={rowVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          transition={{ type: "tween", duration: 0.5 }}
+    <>
+      <SliderContainer>
+        <SlideBtn decreaseIndex={decreaseIndex} increaseIndex={increaseIndex} />
+        <AnimatePresence
+          initial={false}
           custom={back}
+          onExitComplete={toggleLeaving}
         >
-          {data?.results
-            .slice(offset * index, offset * index + offset)
-            .map((data) => (
-              <Box key={data.id} bgPhoto={makeImagePath(data.poster_path)} />
-            ))}
-        </Row>
-      </AnimatePresence>
-    </SliderContainer>
+          <Row
+            key={index}
+            variants={rowVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={{ type: "tween", duration: 0.5 }}
+            custom={back}
+          >
+            {data?.results
+              .slice(offset * index, offset * index + offset)
+              .map((data) => (
+                <Box key={data.id} bgPhoto={makeImagePath(data.poster_path)} />
+              ))}
+          </Row>
+        </AnimatePresence>
+      </SliderContainer>
+    </>
   );
 };
 
 const SliderContainer = styled.div`
-  width: 100%;
-  background-color: #ffc0cb86;
+  display: flex;
+  flex-direction: column;
   position: relative;
 `;
 
 const Row = styled(motion.div)`
-  width: 100%;
-  display: grid;
-  gap: 5px;
-  grid-template-columns: repeat(5, 1fr);
-  background-color: #87cfeb79;
+  display: flex;
+  justify-content: space-between;
   position: absolute;
 `;
 
@@ -105,6 +104,7 @@ const Box = styled(motion.div)<{ bgPhoto: string }>`
   border-radius: 15px;
   background-image: url(${(props) => props.bgPhoto});
   background-size: cover;
+  margin: 0 5px;
 `;
 
 export default Slider;

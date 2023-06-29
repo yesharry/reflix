@@ -16,11 +16,20 @@ const SlideBtn = ({ decreaseIndex, increaseIndex }: ISBtn) => {
 };
 
 const BtnContainer = styled.div`
+  width: 100%;
+  font-size: 50px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 10;
+
   .back {
     cursor: pointer;
+    background-color: #00000057;
   }
   .forward {
     cursor: pointer;
+    background-color: #00000057;
   }
 `;
 
