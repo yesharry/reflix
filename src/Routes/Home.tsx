@@ -1,6 +1,5 @@
 // import Carousel from "../Components/Carousel/Carousel";
 import { useQuery } from "react-query";
-import { styled } from "styled-components";
 import {
   IGetDataResult,
   getNowPlayingMovies,
@@ -33,7 +32,7 @@ const Home = () => {
   );
 
   return (
-    <Wrapper>
+    <>
       {/* <Carousel /> */}
 
       <Slider title={"POPULAR"} data={popularMovies as IGetDataResult} />
@@ -43,10 +42,8 @@ const Home = () => {
       <Slider title={"UPCOMING"} data={upcomingMovies as IGetDataResult} />
 
       <Slider title={"TOP RATED"} data={topRatedMovies as IGetDataResult} />
-    </Wrapper>
+    </>
   );
 };
-
-const Wrapper = styled.div``;
 
 export default Home;
