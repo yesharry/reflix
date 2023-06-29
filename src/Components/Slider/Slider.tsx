@@ -6,12 +6,13 @@ import { makeImagePath } from "../../utils";
 import SlideBtn from "./SlideBtn";
 
 interface ISlider {
+  title: string;
   data: IGetDataResult;
 }
 
 const offset = 5;
 
-const Slider = ({ data }: ISlider) => {
+const Slider = ({ data, title }: ISlider) => {
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
   const [back, setBack] = useState(false);
@@ -41,9 +42,10 @@ const Slider = ({ data }: ISlider) => {
   const toggleLeaving = () => setLeaving((prev) => !prev);
 
   return (
-    <>
+    <Wrapper>
+      <Title>{title}</Title>
+      <SlideBtn decreaseIndex={decreaseIndex} increaseIndex={increaseIndex} />
       <SliderContainer>
-        <SlideBtn decreaseIndex={decreaseIndex} increaseIndex={increaseIndex} />
         <AnimatePresence
           initial={false}
           custom={back}
@@ -66,14 +68,26 @@ const Slider = ({ data }: ISlider) => {
           </Row>
         </AnimatePresence>
       </SliderContainer>
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  margin-bottom: 50px;
+`;
 
 const SliderContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  min-height: 360px;
+`;
+
+const Title = styled.div`
+  font-size: 24px;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 20px;
 `;
 
 const Row = styled(motion.div)`

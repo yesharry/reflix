@@ -35,3 +35,15 @@ export function getNowPlayingMovies() {
     `${BASE_PATH}/movie/now_playing?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}`
   ).then((response) => response.json());
 }
+
+export function getUpcomingMovies() {
+  return fetch(
+    `${BASE_PATH}/movie/upcoming?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}`
+  ).then((response) => response.json());
+}
+
+export function getTopRatedMovies() {
+  return fetch(
+    `${BASE_PATH}/movie/top_rated?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}`
+  ).then((response) => response.json());
+}
