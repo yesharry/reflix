@@ -18,8 +18,11 @@ const Header = () => {
 };
 
 const Nav = styled.nav`
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  top: 0;
   padding: 40px 60px;
 `;
 
