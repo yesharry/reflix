@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { IGetDataResult, getPopularMovies } from "../../api";
 import { styled } from "styled-components";
-import CarouselBtn from "./CarouselBtn";
+// import CarouselBtn from "./CarouselBtn";
 import CarouselImg from "./CarouselImg";
 
 const Carousel = () => {
@@ -11,7 +11,7 @@ const Carousel = () => {
   );
 
   return (
-    <CarouselContainer>
+    <Wrapper>
       <button>prev</button>
       <Div>
         {movieData?.results.slice(0, 5).map((data) => (
@@ -25,24 +25,27 @@ const Carousel = () => {
       </Div>
       <button>next</button>
       {/* <CarouselBtn data={movieData as IGetDataResult} /> */}
-    </CarouselContainer>
+    </Wrapper>
   );
 };
 
-const CarouselContainer = styled.div`
+const Wrapper = styled.div`
   width: 100%;
-  background-color: #ffc0cb7d;
+  height: 500px;
+  /* background-color: #ffc0cb7d; */
   display: flex;
   justify-content: center;
+  overflow: hidden;
+  position: relative;
+  top: 95px;
+  margin-bottom: 200px;
 `;
 
 const Div = styled.div`
-  width: 1200px;
+  width: 1250px;
   height: 500px;
-
-  /* display: flex; */
-
-  overflow: hidden;
+  /* overflow: hidden; */
+  /* position: absolute; */
 `;
 
 export default Carousel;

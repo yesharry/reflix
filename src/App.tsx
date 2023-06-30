@@ -4,6 +4,7 @@ import Home from "./Routes/Home";
 import Tv from "./Routes/Tv";
 import Search from "./Routes/Search";
 import My from "./Routes/My";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/my" element={<My />} />
         <Route path="/search" element={<Search />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

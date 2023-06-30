@@ -3,7 +3,7 @@ import { makeImagePath } from "../../utils";
 
 interface ICarouselImg {
   img: string;
-  title: string;
+  title?: string;
   overview: string;
 }
 const CarouselImg = ({ img, title, overview }: ICarouselImg) => {
@@ -18,7 +18,8 @@ const CarouselImg = ({ img, title, overview }: ICarouselImg) => {
 const ImgContainer = styled.div<{ bgPhoto: string }>`
   width: 100%;
   height: 100%;
-  background-image: url(${(props) => props.bgPhoto});
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
+    url(${(props) => props.bgPhoto});
   background-size: cover;
   border-radius: 15px;
 
