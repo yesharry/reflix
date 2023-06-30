@@ -7,6 +7,7 @@ import {
   getPopularTv,
   getTopRatedTv,
 } from "../api";
+import { styled } from "styled-components";
 
 const Tv = () => {
   const { data: airingToday } = useQuery<IGetDataResult>(
@@ -30,13 +31,19 @@ const Tv = () => {
   );
 
   return (
-    <>
+    <Wrapper>
       <Slider title={"AIRING TODAY"} data={airingToday as IGetDataResult} />
       <Slider title={"ON THE AIR"} data={onTheAir as IGetDataResult} />
       <Slider title={"POPULAR"} data={popularTv as IGetDataResult} />
       <Slider title={"TOP RATED"} data={topRatedTv as IGetDataResult} />
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default Tv;

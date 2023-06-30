@@ -44,8 +44,8 @@ const Slider = ({ data, title }: ISlider) => {
   return (
     <Wrapper>
       <Title>{title}</Title>
-      <SlideBtn decreaseIndex={decreaseIndex} increaseIndex={increaseIndex} />
       <SliderContainer>
+        <SlideBtn decreaseIndex={decreaseIndex} increaseIndex={increaseIndex} />
         <AnimatePresence
           initial={false}
           custom={back}
@@ -73,14 +73,16 @@ const Slider = ({ data, title }: ISlider) => {
 };
 
 const Wrapper = styled.div`
+  width: 1250px;
+  overflow: hidden;
   margin-bottom: 70px;
 `;
 
 const SliderContainer = styled.div`
+  min-height: 360px;
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: 360px;
 `;
 
 const Title = styled.div`

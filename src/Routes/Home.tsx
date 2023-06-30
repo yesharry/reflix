@@ -9,6 +9,7 @@ import {
 } from "../api";
 
 import Slider from "../Components/Slider/Slider";
+import { styled } from "styled-components";
 
 const Home = () => {
   const { data: popularMovies } = useQuery<IGetDataResult>(
@@ -32,7 +33,7 @@ const Home = () => {
   );
 
   return (
-    <>
+    <Wrapper>
       {/* <Carousel /> */}
 
       <Slider title={"POPULAR"} data={popularMovies as IGetDataResult} />
@@ -42,8 +43,14 @@ const Home = () => {
       <Slider title={"UPCOMING"} data={upcomingMovies as IGetDataResult} />
 
       <Slider title={"TOP RATED"} data={topRatedMovies as IGetDataResult} />
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default Home;
