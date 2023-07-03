@@ -1,21 +1,35 @@
 import { styled } from "styled-components";
 import { makeImagePath } from "../../utils";
 
-interface ICarouselImg {
-  img: string;
+interface IImg {
   title?: string;
   overview: string;
+  backdrop: string;
 }
-const CarouselImg = ({ img, title, overview }: ICarouselImg) => {
+
+interface ImgProps {
+  bgPhoto: string;
+}
+
+const CarouselImg = ({ title, overview, backdrop }: IImg) => {
   return (
-    <ImgContainer bgPhoto={makeImagePath(img)}>
-      <Title>{title}</Title>
-      <Overview>{overview}</Overview>
+    <ImgContainer>
+      <ImgBox bgPhoto={makeImagePath(backdrop)}>
+        <Title>{title}</Title>
+        <Overview>{overview}</Overview>
+      </ImgBox>
     </ImgContainer>
   );
 };
 
-const ImgContainer = styled.div<{ bgPhoto: string }>`
+const ImgContainer = styled.div`
+  width: 1250px;
+  height: 500px;
+  position: relative;
+  margin: 0 10px;
+`;
+
+const ImgBox = styled.div<ImgProps>`
   width: 100%;
   height: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
@@ -27,7 +41,8 @@ const ImgContainer = styled.div<{ bgPhoto: string }>`
   flex-direction: column;
   justify-content: end;
 
-  padding: 40px;
+  padding: 40px 30px;
+  position: absolute;
 `;
 
 const Title = styled.h2`

@@ -1,4 +1,3 @@
-import Carousel from "../Components/Carousel/Carousel";
 import { useQuery } from "react-query";
 import {
   IGetDataResult,
@@ -10,6 +9,7 @@ import {
 
 import Slider from "../Components/Slider/Slider";
 import { styled } from "styled-components";
+import Carousel from "../Components/Carousel/Carousel";
 
 const Home = () => {
   const { data: popularMovies } = useQuery<IGetDataResult>(
@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <Carousel />
+      <Carousel data={popularMovies as IGetDataResult} />
 
       <Slider title={"POPULAR"} data={popularMovies as IGetDataResult} />
 

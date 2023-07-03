@@ -1,51 +1,41 @@
-import { useQuery } from "react-query";
-import { IGetDataResult, getPopularMovies } from "../../api";
 import { styled } from "styled-components";
-// import CarouselBtn from "./CarouselBtn";
+import { IGetDataResult } from "../../api";
 import CarouselImg from "./CarouselImg";
+import { useEffect, useRef, useState } from "react";
+import CarouselBtn from "./CarouselBtn";
 
-const Carousel = () => {
-  const { data: movieData } = useQuery<IGetDataResult>(
-    ["movieData"],
-    getPopularMovies
-  );
-
+interface ICarousel {
+  data: IGetDataResult;
+}
+const Carousel = ({ data }: ICarousel) => {
   return (
     <Wrapper>
-      <button>prev</button>
-      <Div>
-        {movieData?.results.slice(0, 5).map((data) => (
+      <ImgWrapper>
+        {data?.results.slice(0, 5).map((data) => (
           <CarouselImg
             key={data.id}
-            img={data.backdrop_path}
             title={data.title}
             overview={data.overview}
+            backdrop={data.backdrop_path}
           />
         ))}
-      </Div>
-      <button>next</button>
-      {/* <CarouselBtn data={movieData as IGetDataResult} /> */}
+      </ImgWrapper>
+      <button>left</button>
+      <button>right</button>
+      {/* <CarouselBtn /> */}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 500px;
-  /* background-color: #ffc0cb7d; */
+  margin-bottom: 100px;
   display: flex;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-  top: 95px;
-  margin-bottom: 200px;
+  flex-direction: column;
 `;
 
-const Div = styled.div`
-  width: 1250px;
-  height: 500px;
-  /* overflow: hidden; */
-  /* position: absolute; */
+const ImgWrapper = styled.div`
+  /* height: 500px; */
+  display: flex;
 `;
 
 export default Carousel;
