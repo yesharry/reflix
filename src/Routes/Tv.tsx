@@ -33,7 +33,7 @@ const Tv = () => {
 
   return (
     <Wrapper>
-      <Carousel data={popularTv as IGetDataResult} />
+      <Carousel data={topRatedTv as IGetDataResult} />
       <Slider title={"AIRING TODAY"} data={airingToday as IGetDataResult} />
       <Slider title={"ON THE AIR"} data={onTheAir as IGetDataResult} />
       <Slider title={"POPULAR"} data={popularTv as IGetDataResult} />
