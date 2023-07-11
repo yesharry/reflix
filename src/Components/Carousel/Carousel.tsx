@@ -98,7 +98,7 @@ const BannerImg = styled(motion.div)`
 const bannerVariants = {
   hidden: (back: boolean) => {
     return {
-      x: back === false ? window.outerWidth + 5 : -window.outerWidth - 5,
+      x: back === false ? window.outerWidth + 1 : -window.outerWidth - 1,
     };
   },
   visible: () => {
@@ -106,7 +106,7 @@ const bannerVariants = {
   },
   exit: (back: boolean) => {
     return {
-      x: back === false ? -window.outerWidth - 5 : window.outerWidth + 5,
+      x: back === false ? -window.outerWidth - 1 : window.outerWidth + 1,
     };
   },
 };
