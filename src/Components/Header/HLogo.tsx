@@ -7,7 +7,7 @@ const logoVariants = {
     fill: "white",
     fillOpacity: 1,
   },
-  active: {
+  hover: {
     fill: "#ffcc00",
     fillOpacity: [0, 1, 0],
     transition: {
@@ -28,7 +28,7 @@ const HLogo = () => {
       onClick={goHome}
       variants={logoVariants}
       initial="normal"
-      whileHover="active"
+      whileHover="hover"
       height="2em"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1024 276.742"
