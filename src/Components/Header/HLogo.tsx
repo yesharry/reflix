@@ -45,7 +45,6 @@ const HLogo = () => {
 
 const Logo = styled(motion.svg)`
   cursor: pointer;
-  /* fill: #ffcc00; */
   path {
     stroke-width: 6px;
     stroke: #a5a5a5;

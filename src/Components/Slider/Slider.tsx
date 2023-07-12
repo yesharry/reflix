@@ -4,15 +4,20 @@ import { AnimatePresence, motion } from "framer-motion";
 import { styled } from "styled-components";
 import { makeImagePath } from "../../utils";
 import SlideBtn from "./SlideBtn";
+import { PathMatch, useMatch, useNavigate } from "react-router-dom";
+import Modal from "../Modal/Modal";
 
 interface ISlider {
   title: string;
+  listType: string;
+  linkName: string;
+  mediaType: string;
   data: IGetDataResult;
 }
 
 const offset = 5;
 
-const Slider = ({ data, title }: ISlider) => {
+const Slider = ({ data, title, listType, linkName, mediaType }: ISlider) => {
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
   const [back, setBack] = useState(false);
@@ -41,6 +46,17 @@ const Slider = ({ data, title }: ISlider) => {
 
   const toggleLeaving = () => setLeaving((prev) => !prev);
 
+  // click modal
+  const navigate = useNavigate();
+
+  const bigMatch: PathMatch<string> | null = useMatch(
+    `${linkName}/${listType}/:id`
+  );
+
+  const onBoxClicked = (menu: string, type: string, id: number) => {
+    navigate(`/${menu}/${type}/${id}`);
+  };
+
   return (
     <Wrapper>
       <Title>{title}</Title>
@@ -64,16 +80,31 @@ const Slider = ({ data, title }: ISlider) => {
               .map((data) => (
                 <Box
                   key={data.id}
-                  bgPhoto={makeImagePath(data.poster_path)}
                   variants={boxVariant}
                   initial="normal"
                   whileHover="active"
+                  transition={{ type: "tween" }}
+                  layoutId={data.id + "" + listType}
+                  bgPhoto={makeImagePath(data.poster_path)}
+                  onClick={() => {
+                    onBoxClicked(linkName, listType, data.id);
+                  }}
                 />
               ))}
           </Row>
         </AnimatePresence>
         <SlideBtn decreaseIndex={decreaseIndex} increaseIndex={increaseIndex} />
       </SliderContainer>
+      <AnimatePresence>
+        {bigMatch ? (
+          <Modal
+            dataId={Number(bigMatch?.params.id)}
+            listType={listType}
+            linkName={linkName}
+            requestUrl={mediaType}
+          />
+        ) : null}
+      </AnimatePresence>
     </Wrapper>
   );
 };
@@ -127,6 +158,7 @@ const Box = styled(motion.div)<{ bgPhoto: string }>`
   background-image: url(${(props) => props.bgPhoto});
   background-size: cover;
   background-position: center center;
+  float: left;
   margin: 0 5px;
 
   cursor: pointer;

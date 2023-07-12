@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   position: fixed;
-  z-index: 100;
+  z-index: 50;
 `;
 
 const Nav = styled.nav`

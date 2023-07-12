@@ -3,6 +3,15 @@ const BASE_PATH = "https://api.themoviedb.org/3/";
 const REGION = "KR";
 const LANGUAGE = "ko-KO";
 
+export const LIST_TYPE = [
+  "nowPlaying",
+  "upcomingMovies",
+  "popularMovies",
+  "topRated",
+  "tvPopular",
+  "tvTopRated",
+];
+
 export interface IData {
   id: number;
   backdrop_path: string;
@@ -51,18 +60,6 @@ export function getTopRatedMovies() {
 }
 
 // 티비 데이터
-export function getAiringTodayTv() {
-  return fetch(
-    `${BASE_PATH}/tv/airing_today?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}`
-  ).then((response) => response.json());
-}
-
-export function getOnTheAirTv() {
-  return fetch(
-    `${BASE_PATH}/tv/on_the_air?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}`
-  ).then((response) => response.json());
-}
-
 export function getPopularTv() {
   return fetch(
     `${BASE_PATH}/tv/popular?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}`
@@ -98,5 +95,33 @@ export interface IGetSearchResult {
 export function getSearch(keyword: string) {
   return fetch(
     `${BASE_PATH}/search/multi?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}&query=${keyword}`
+  ).then((response) => response.json());
+}
+
+// detail data
+export interface IGenre {
+  id: number;
+  name: string;
+}
+
+export interface IDetail {
+  id: number;
+  overview: string;
+  title?: string;
+  original_title?: string;
+  name?: string;
+  vote_average: number;
+  runtime: number;
+  backdrop_path?: string;
+  poster_path: string;
+  genres: IGenre[];
+  release_date?: string;
+  first_air_date?: string;
+  tagline?: string;
+}
+
+export function getDetailData(requestUrl: string, id: number) {
+  return fetch(
+    `${BASE_PATH}/${requestUrl}/${id}?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}`
   ).then((response) => response.json());
 }
