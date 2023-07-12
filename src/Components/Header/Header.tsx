@@ -5,7 +5,7 @@ import HLogo from "./HLogo";
 
 const Header = () => {
   return (
-    <>
+    <Wrapper>
       <Nav>
         <Col>
           <HLogo />
@@ -15,21 +15,25 @@ const Header = () => {
           <HSearch />
         </Col>
       </Nav>
-    </>
+    </Wrapper>
   );
 };
 
-const Nav = styled.nav`
+const Wrapper = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 100;
+`;
+
+const Nav = styled.nav`
+  width: 1250px;
   height: 95px;
   background-color: #1b1b1b;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* position: fixed; */
-  /* top: 0; */
-  padding: 40px 60px;
-  z-index: 100;
 `;
 
 const Col = styled.div`

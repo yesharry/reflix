@@ -81,6 +81,8 @@ const Wrapper = styled.div`
   height: 550px;
   margin-bottom: 70px;
   overflow: hidden;
+  position: relative;
+  top: 100px;
 `;
 
 const BannerContainer = styled.div`
