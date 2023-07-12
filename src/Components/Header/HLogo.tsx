@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 const logoVariants = {
@@ -16,8 +17,15 @@ const logoVariants = {
 };
 
 const HLogo = () => {
+  const navigate = useNavigate();
+
+  const goHome = () => {
+    navigate("/");
+  };
+
   return (
     <Logo
+      onClick={goHome}
       variants={logoVariants}
       initial="normal"
       whileHover="active"
