@@ -41,6 +41,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  top: 100px;
 `;
 
 const CountContainer = styled.div`

@@ -21,6 +21,7 @@ const Header = () => {
 
 const Wrapper = styled.div`
   width: 100%;
+  background-color: #1b1b1b;
   display: flex;
   justify-content: center;
   position: fixed;
