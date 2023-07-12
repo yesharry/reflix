@@ -45,7 +45,6 @@ const Slider = ({ data, title }: ISlider) => {
     <Wrapper>
       <Title>{title}</Title>
       <SliderContainer>
-        <SlideBtn decreaseIndex={decreaseIndex} increaseIndex={increaseIndex} />
         <AnimatePresence
           initial={false}
           custom={back}
@@ -67,6 +66,7 @@ const Slider = ({ data, title }: ISlider) => {
               ))}
           </Row>
         </AnimatePresence>
+        <SlideBtn decreaseIndex={decreaseIndex} increaseIndex={increaseIndex} />
       </SliderContainer>
     </Wrapper>
   );
@@ -120,7 +120,17 @@ const Box = styled(motion.div)<{ bgPhoto: string }>`
   border-radius: 15px;
   background-image: url(${(props) => props.bgPhoto});
   background-size: cover;
+  background-position: center center;
   margin: 0 5px;
+
+  cursor: pointer;
+
+  &:first-child {
+    transform-origin: center left;
+  }
+  &:last-child {
+    transform-origin: center right;
+  }
 `;
 
 export default Slider;

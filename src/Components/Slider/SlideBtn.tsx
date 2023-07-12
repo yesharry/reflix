@@ -8,10 +8,16 @@ interface ISBtn {
 
 const SlideBtn = ({ decreaseIndex, increaseIndex }: ISBtn) => {
   return (
-    <BtnContainer>
-      <IoIosArrowBack className="back" onClick={decreaseIndex} />
-      <IoIosArrowForward className="forward" onClick={increaseIndex} />
-    </BtnContainer>
+    <>
+      <BtnContainer>
+        <Back>
+          <IoIosArrowBack onClick={decreaseIndex} />
+        </Back>
+        <Forward>
+          <IoIosArrowForward onClick={increaseIndex} />
+        </Forward>
+      </BtnContainer>
+    </>
   );
 };
 
@@ -20,27 +26,29 @@ const BtnContainer = styled.div`
   height: 100%;
   font-size: 50px;
   color: #a5a5a5;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
+  top: 150px;
+`;
+
+const Back = styled.div`
+  background-color: #00000057;
   position: absolute;
-  z-index: 10;
+  left: 0;
+  cursor: pointer;
 
-  .back {
-    cursor: pointer;
-    background-color: #00000057;
-
-    &:hover {
-      color: white;
-    }
+  &:hover {
+    color: white;
   }
-  .forward {
-    cursor: pointer;
-    background-color: #00000057;
+`;
 
-    &:hover {
-      color: white;
-    }
+const Forward = styled.div`
+  background-color: #00000057;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+
+  &:hover {
+    color: white;
   }
 `;
 

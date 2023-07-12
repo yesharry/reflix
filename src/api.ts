@@ -74,3 +74,29 @@ export function getTopRatedTv() {
     `${BASE_PATH}/tv/top_rated?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}`
   ).then((response) => response.json());
 }
+
+interface ISearch {
+  id: number;
+  title?: string;
+  name?: string;
+  original_title?: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path?: string;
+  media_type: string;
+  release_date: string;
+  vote_average: number;
+}
+
+export interface IGetSearchResult {
+  page: number;
+  results: ISearch[];
+  total_pages: number;
+  total_results: number;
+}
+
+export function getSearch(keyword: string) {
+  return fetch(
+    `${BASE_PATH}/search/multi?api_key=${API_KEY}&language=${LANGUAGE}&region=${REGION}&query=${keyword}`
+  ).then((response) => response.json());
+}
