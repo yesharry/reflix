@@ -79,7 +79,7 @@ const Carousel = ({ data }: ICarousel) => {
 const Wrapper = styled.div`
   width: 1250px;
   height: 550px;
-  margin-bottom: 70px;
+  margin-bottom: 170px;
   overflow: hidden;
   position: relative;
   top: 100px;
