@@ -62,7 +62,13 @@ const Slider = ({ data, title }: ISlider) => {
             {data?.results
               .slice(offset * index, offset * index + offset)
               .map((data) => (
-                <Box key={data.id} bgPhoto={makeImagePath(data.poster_path)} />
+                <Box
+                  key={data.id}
+                  bgPhoto={makeImagePath(data.poster_path)}
+                  variants={boxVariant}
+                  initial="normal"
+                  whileHover="active"
+                />
               ))}
           </Row>
         </AnimatePresence>
@@ -79,7 +85,7 @@ const Wrapper = styled.div`
 `;
 
 const SliderContainer = styled.div`
-  min-height: 360px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -132,5 +138,17 @@ const Box = styled(motion.div)<{ bgPhoto: string }>`
     transform-origin: center right;
   }
 `;
+
+const boxVariant = {
+  normal: {
+    scale: 1,
+  },
+  active: {
+    scale: 1.05,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
 
 export default Slider;

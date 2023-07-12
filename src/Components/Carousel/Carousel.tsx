@@ -89,6 +89,8 @@ const BannerContainer = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+
+  cursor: pointer;
 `;
 
 const BannerImg = styled(motion.div)`
