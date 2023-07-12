@@ -42,9 +42,4 @@ const ITEMS = [
     name: "TV",
     link: "tv",
   },
-  {
-    id: 2,
-    name: "MY",
-    link: "my",
-  },
 ];
