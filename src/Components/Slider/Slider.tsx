@@ -7,6 +7,34 @@ import SlideBtn from "./SlideBtn";
 import { PathMatch, useMatch, useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
 
+const rowVariants = {
+  hidden: (back: boolean) => {
+    return {
+      x: back === false ? window.outerWidth + 5 : -window.outerWidth - 5,
+    };
+  },
+  visible: {
+    x: 0,
+  },
+  exit: (back: boolean) => {
+    return {
+      x: back === false ? -window.outerWidth - 5 : window.outerWidth + 5,
+    };
+  },
+};
+
+const boxVariant = {
+  normal: {
+    scale: 1,
+  },
+  active: {
+    scale: 1.05,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
 interface ISlider {
   title: string;
   listType: string;
@@ -135,22 +163,6 @@ const Row = styled(motion.div)`
   position: absolute;
 `;
 
-const rowVariants = {
-  hidden: (back: boolean) => {
-    return {
-      x: back === false ? window.outerWidth + 5 : -window.outerWidth - 5,
-    };
-  },
-  visible: {
-    x: 0,
-  },
-  exit: (back: boolean) => {
-    return {
-      x: back === false ? -window.outerWidth - 5 : window.outerWidth + 5,
-    };
-  },
-};
-
 const Box = styled(motion.div)<{ bgPhoto: string }>`
   width: 240px;
   height: 360px;
@@ -170,17 +182,5 @@ const Box = styled(motion.div)<{ bgPhoto: string }>`
     transform-origin: center right;
   }
 `;
-
-const boxVariant = {
-  normal: {
-    scale: 1,
-  },
-  active: {
-    scale: 1.05,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
 
 export default Slider;

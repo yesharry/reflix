@@ -29,7 +29,7 @@ const Search = () => {
   };
 
   return (
-    <Wrapper>
+    <>
       <SearchWrapper>
         <CountContainer>
           <CountText>프로그램 검색 결과</CountText>
@@ -59,11 +59,9 @@ const Search = () => {
           />
         ) : null}
       </AnimatePresence>
-    </Wrapper>
+    </>
   );
 };
-
-const Wrapper = styled.div``;
 
 const SearchWrapper = styled.div`
   width: 100%;

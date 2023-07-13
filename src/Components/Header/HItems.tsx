@@ -43,15 +43,15 @@ const Item = styled.li`
 `;
 
 const Circle = styled(motion.span)`
-  position: absolute;
   width: 5px;
   height: 5px;
+  background-color: #ffcc00;
   border-radius: 5px;
+  position: absolute;
   bottom: -5px;
   left: 0;
   right: 0;
   margin: 0 auto;
-  background-color: #ffcc00;
 `;
 
 export default HItems;

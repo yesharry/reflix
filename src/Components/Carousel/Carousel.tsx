@@ -5,6 +5,22 @@ import { AnimatePresence, motion } from "framer-motion";
 import { makeImagePath } from "../../utils";
 import CarouselBtn from "./CarouselBtn";
 
+const bannerVariants = {
+  hidden: (back: boolean) => {
+    return {
+      x: back === false ? window.outerWidth + 1 : -window.outerWidth - 1,
+    };
+  },
+  visible: () => {
+    return { x: 0 };
+  },
+  exit: (back: boolean) => {
+    return {
+      x: back === false ? -window.outerWidth - 1 : window.outerWidth + 1,
+    };
+  },
+};
+
 interface ICarousel {
   data: IGetDataResult;
 }
@@ -98,22 +114,6 @@ const BannerImg = styled(motion.div)`
   height: 100%;
   position: absolute;
 `;
-
-const bannerVariants = {
-  hidden: (back: boolean) => {
-    return {
-      x: back === false ? window.outerWidth + 1 : -window.outerWidth - 1,
-    };
-  },
-  visible: () => {
-    return { x: 0 };
-  },
-  exit: (back: boolean) => {
-    return {
-      x: back === false ? -window.outerWidth - 1 : window.outerWidth + 1,
-    };
-  },
-};
 
 const Banner = styled.div<{ bgPhoto: string }>`
   width: 100%;

@@ -28,8 +28,6 @@ const Modal = ({
     () => getDetailData(requestUrl, dataId) || null
   );
 
-  console.log(data);
-
   const onOverlayClicked = () => {
     if (linkName === "home") linkName = "";
 
