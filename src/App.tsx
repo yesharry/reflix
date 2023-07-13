@@ -3,7 +3,6 @@ import Header from "./Components/Header/Header";
 import Home from "./Routes/Home";
 import Tv from "./Routes/Tv";
 import Search from "./Routes/Search";
-import My from "./Routes/My";
 import Footer from "./Components/Footer/Footer";
 
 function App() {
@@ -17,8 +16,8 @@ function App() {
         <Route path="/tv" element={<Tv />} />
         <Route path="/tv/:listType/:id" element={<Tv />} />
 
-        <Route path="/my" element={<My />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/search/:listName/:id" element={<Search />} />
       </Routes>
       <Footer />
     </BrowserRouter>
