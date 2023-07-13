@@ -28,6 +28,8 @@ const Modal = ({
     () => getDetailData(requestUrl, dataId) || null
   );
 
+  console.log(data);
+
   const onOverlayClicked = () => {
     if (linkName === "home") linkName = "";
 
@@ -55,11 +57,17 @@ const Modal = ({
         />
         <ModalContent>
           <PosterBox>
-            <PosterImg src={makeImagePath(data?.poster_path || "", "w500")} />
+            <PosterImg src={makeImagePath(data?.poster_path || "")} />
           </PosterBox>
           <DetailBox>
-            <TitleK>{data?.title}</TitleK>
+            <TitleK>{data?.title ? data?.title : data?.name}</TitleK>
             <TitleE>{data?.original_title}</TitleE>
+
+            <InfoBox>
+              <Release>개봉일 {data?.release_date}</Release>
+              <Genres>{data?.genres[0].name}</Genres>
+            </InfoBox>
+
             <TagLine>{data?.tagline}</TagLine>
             <Overview>{data?.overview}</Overview>
           </DetailBox>
@@ -81,18 +89,20 @@ const Overlay = styled(motion.div)`
 `;
 
 const ModalBox = styled(motion.div)`
-  width: 800px;
-  height: 75%;
+  width: 750px;
+  height: 600px;
   background-color: #1b1b1b;
   border-radius: 15px;
 
   position: fixed;
-  top: 150px;
+  top: 100px;
   left: 0;
   right: 0;
 
   margin: 0 auto;
   z-index: 100;
+
+  overflow: scroll;
 `;
 
 const Cover = styled.div`
@@ -105,7 +115,7 @@ const Cover = styled.div`
   display: flex;
   align-items: end;
 
-  padding: 20px 30px;
+  padding: 30px;
 `;
 
 const ModalContent = styled.div`
@@ -116,25 +126,57 @@ const ModalContent = styled.div`
 `;
 
 const PosterBox = styled.div`
-  width: 190px;
-  height: 240px;
+  width: 200px;
+  height: 290px;
 `;
 
 const PosterImg = styled.img`
   width: 100%;
+  height: 100%;
+  background-size: cover;
 `;
 
 const DetailBox = styled.div`
+  width: 500px;
   display: flex;
   flex-direction: column;
+  margin-left: 15px;
 `;
 
-const TitleK = styled.h2``;
+const TitleK = styled.h2`
+  font-size: 35px;
+  font-weight: 400;
+  padding-top: 30px;
+  margin-bottom: 5px;
+`;
 
-const TitleE = styled.p``;
+const TitleE = styled.p`
+  font-size: 18px;
+  margin-bottom: 25px;
+`;
 
-const TagLine = styled.p``;
+const InfoBox = styled.div`
+  display: flex;
+  margin-bottom: 15px;
+  font-size: 18px;
+`;
 
-const Overview = styled.div``;
+const Release = styled.p`
+  margin-right: 20px;
+`;
+
+const Genres = styled.p``;
+
+const TagLine = styled.p`
+  color: #ffcc00;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 10px;
+`;
+
+const Overview = styled.p`
+  font-size: 16px;
+  line-height: 24px;
+`;
 
 export default Modal;
