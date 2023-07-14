@@ -15,7 +15,7 @@ const Search = () => {
   const location = useLocation();
   const keyword = new URLSearchParams(location.search).get("keyword");
 
-  const { data } = useQuery<IGetSearchResult>(
+  const { data, isLoading } = useQuery<IGetSearchResult>(
     ["searchData", keyword],
     async () => keyword && getSearch(keyword)
   );
@@ -30,38 +30,50 @@ const Search = () => {
 
   return (
     <>
-      <SearchWrapper>
-        <CountContainer>
-          <CountText>프로그램 검색 결과</CountText>
-          <Count>{data?.results.length}</Count>
-        </CountContainer>
-        <SearchContainer>
-          {data?.results.map((search) => (
-            <SearchBox
-              key={search.id}
-              layoutId={search.id + "" + search.media_type}
-              onClick={() => onBoxClicked(search.media_type, search.id)}
-            >
-              <SearchImg src={makeImagePath(search.poster_path, "w500")} />
-              <Title>{search.title ? search.title : search.name}</Title>
-            </SearchBox>
-          ))}
-        </SearchContainer>
-      </SearchWrapper>
-      <AnimatePresence>
-        {bigMatch ? (
-          <Modal
-            dataId={Number(bigMatch?.params.id)}
-            listType={bigMatch?.params.linkName || ""}
-            linkName={"search"}
-            requestUrl={bigMatch.params.linkName || ""}
-            returnUrl={`/search?keyword=${keyword}`}
-          />
-        ) : null}
-      </AnimatePresence>
+      {isLoading ? (
+        <Loader>Loading...</Loader>
+      ) : (
+        <>
+          <SearchWrapper>
+            <CountContainer>
+              <CountText>프로그램 검색 결과</CountText>
+              <Count>{data?.results.length}</Count>
+            </CountContainer>
+            <SearchContainer>
+              {data?.results.map((search) => (
+                <SearchBox
+                  key={search.id}
+                  layoutId={search.id + "" + search.media_type}
+                  onClick={() => onBoxClicked(search.media_type, search.id)}
+                >
+                  <SearchImg src={makeImagePath(search.poster_path, "w500")} />
+                  <Title>{search.title ? search.title : search.name}</Title>
+                </SearchBox>
+              ))}
+            </SearchContainer>
+          </SearchWrapper>
+          <AnimatePresence>
+            {bigMatch ? (
+              <Modal
+                dataId={Number(bigMatch?.params.id)}
+                listType={bigMatch?.params.linkName || ""}
+                linkName={"search"}
+                requestUrl={bigMatch.params.linkName || ""}
+                returnUrl={`/search?keyword=${keyword}`}
+              />
+            ) : null}
+          </AnimatePresence>
+        </>
+      )}
     </>
   );
 };
+
+const Loader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const SearchWrapper = styled.div`
   width: 100%;
