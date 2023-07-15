@@ -11,13 +11,13 @@ const HItems = () => {
       <Item>
         <Link to="/">
           HOME
-          {homeMatch && <Circle />}
+          {homeMatch && <Circle layoutId="circle" />}
         </Link>
       </Item>
       <Item>
         <Link to="tv">
           TV
-          {tvMatch && <Circle />}
+          {tvMatch && <Circle layoutId="circle" />}
         </Link>
       </Item>
     </Items>
