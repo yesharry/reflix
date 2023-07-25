@@ -39,6 +39,15 @@ footer, header, hgroup, main, menu, nav, section {
 }
 body {
   line-height: 1;
+
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background: #cccccc84;
+  }
 }
 menu, ol, ul {
   list-style: none;
