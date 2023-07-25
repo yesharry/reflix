@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import HItems from "./HItems";
 import HSearch from "./HSearch";
 import HLogo from "./HLogo";
+import HLogin from "./HLogin";
 
 const Header = () => {
   return (
@@ -13,6 +14,7 @@ const Header = () => {
         </Col>
         <Col>
           <HSearch />
+          <HLogin />
         </Col>
       </Nav>
     </Wrapper>
