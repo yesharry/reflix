@@ -45,7 +45,7 @@ const Modal = ({
         animate={{ opacity: 1 }}
         onClick={onOverlayClicked}
       />
-      <ModalBox layoutId={modalMatch?.params.id + listType}>
+      <ModalBox className="scroll" layoutId={modalMatch?.params.id + listType}>
         <Cover
           style={{
             backgroundImage: `linear-gradient(to top, black, transparent),url(${makeImagePath(
@@ -97,10 +97,17 @@ const ModalBox = styled(motion.div)`
   left: 0;
   right: 0;
 
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background: #cccccc84;
+  }
+
   margin: 0 auto;
   z-index: 100;
-
-  overflow: scroll;
 `;
 
 const Cover = styled.div`
@@ -118,7 +125,7 @@ const Cover = styled.div`
 
 const ModalContent = styled.div`
   display: flex;
-  padding-left: 20px;
+  padding: 0 20px;
   position: relative;
   top: -100px;
 `;
